@@ -1,0 +1,106 @@
+{
+    "modules-left": ["custom/power","sway/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray","network","pulseaudio","battery","backlight","sway/language"],
+    "sway/workspaces": {
+	"disable-scroll": true,
+	"all-outputs": true,
+	"format": "{icon}",
+ 	"persistent_workspaces": {
+ 		"1": [],
+ 		"2": [],
+ 		"3": [],
+ 		"4": [],
+ 		"5": [],
+ 		"6": [],
+		"7": [],
+	},
+       "format-icons": {
+             "1": "",
+             "2": "爵",
+             "3": "",
+             "4": "",
+             "5": "",
+             "6": "缾",
+	     "7": "阮"
+         }
+    },
+    "tray":{
+	"icon-size": 13
+    },
+    "sway/language":{
+	"format": "{shortDescription}",
+	"tooltip": false
+    },
+    "network":{
+	"interval": 6,
+	"format-wifi":"",
+	"format-ethernet": "",
+	"format-disconnected" : "⚠ ",
+	"tooltip-format": "{ifname}: {ipaddr}",
+	"on-click": "wofi-wifi-menu"
+    },
+    "network#vpn":{
+    	"interface": "tun0",
+	"format": " 嬨",
+	"format-disconnected": "⚠",
+	"tooltip-format": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio":{
+	"scroll-step": 2, // %, can be a float
+    	"format": "{icon}",
+	"format-muted": "",
+	"tooltip": true,
+	"format-tooltip": "{volume}%",
+    	"format-icons": {
+      		"headphone": "",
+      		"hands-free": "וֹ",
+      		"headset": "",
+      		"phone": "",
+      		"portable": "",
+      		"car": "",
+      		"default": ["", ""]
+    	},
+    	"on-click-right": "pavucontrol",
+	"on-click": "amixer -q sset Master toggle",
+    	"on-scroll-up": "amixer -q sset Master 2%+",
+    	"on-scroll-down": "amixer -q sset Master 2%-",
+    },
+    "battery":{
+	"icon-size": 18,
+	"states":{
+		"warning": 30,
+		"critical": 15,
+		"full": 99
+	},
+	"format": "{icon}",
+    "format-warning": "{icon}",
+    "format-critical": "{icon}",
+    "format-charging": "",
+    "format-alt": "{icon}",
+    "format-full": "{icon}",
+	"tooltip": true,
+	"format-tooltip": "{capacity}% left: {timeTo}",
+	"format-icons": ["", "", "", "", ""]
+    },
+    "backlight":{
+	"format": "{icon}{percent}",
+	"format-icons": ["", ""],
+	"tooltip": true,
+	"format-tooltip": "{percent}%",
+	"on-scroll-down": "brightnessctl -c backlight set 1%-",
+    	"on-scroll-up": "brightnessctl -c backlight set +1%"
+    },
+    "clock":{
+	"interval": 1,
+    	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    	"format": "{:%H:%M}"
+    },
+    "custom/power": {
+	"format":"⏻",
+    	"on-click": "exec ~/.config/waybar/power-menu.sh",
+    	"tooltip": false,
+    },
+
+}
+
